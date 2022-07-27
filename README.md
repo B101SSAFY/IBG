@@ -70,17 +70,6 @@
 - 보드게임 데이터: Kaggle [Board Game Data](https://www.kaggle.com/datasets/mrpantherson/board-game-data), [bgg-games-data](https://www.kaggle.com/datasets/caesuric/bgggamesdata)
 - 리뷰 데이터: [BGG(Board Game Geek)](https://boardgamegeek.com/) crawling
 
-### 6) 역할 💛 `Frontend`
-
-#### Navbar, 메인, 게임 상세 조회, 게임 검색 페이지 구현
-
-- 별점, 관심 버튼, 게임 정보 카드 및 리뷰(댓글) 등을 여러 페이지에서 사용할 수 있도록 구현했습니다.
-- 어떤 기기에서도 편리하게 사용할 수 있도록 반응형으로 구현했습니다.
-
-#### API 요청 결과 지연에 따른 대응
-
-- API 요청 결과가 늦을 경우, 의도하지 않은 데이터를 보여주는 것을 대비하고 성능을 개선하기 위해 AbortController를 사용하여 통신을 취소했습니다.
-- API 요청 결과를 기다리는 동안 사용자 경험 개선을 위해 스켈레톤 및 로딩 스피너를 적용했습니다.
 
 <br>
 

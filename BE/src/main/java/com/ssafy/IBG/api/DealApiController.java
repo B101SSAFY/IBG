@@ -4,10 +4,10 @@ import com.ssafy.IBG.api.deal.*;
 import com.ssafy.IBG.api.dto.Result;
 import com.ssafy.IBG.domain.Deal;
 import com.ssafy.IBG.domain.DealReview;
-import com.ssafy.IBG.domain.Game;
+import com.ssafy.IBG.Game.domain.Game;
 import com.ssafy.IBG.domain.User;
 import com.ssafy.IBG.service.DealService;
-import com.ssafy.IBG.service.GameService;
+import com.ssafy.IBG.Game.service.GameService;
 import com.ssafy.IBG.service.UserService;
 import com.ssafy.IBG.util.S3Uploader;
 import lombok.RequiredArgsConstructor;
@@ -16,9 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -113,8 +110,8 @@ public class DealApiController {
                         deal.getDealNo(),
                         deal.getUser().getUserNo(),
                         deal.getUser().getUserNick(),
-                        deal.getGame().getGameNo(),
-                        deal.getGame().getGameName(),
+                        deal.getGame().getNo(),
+                        deal.getGame().getName(),
                         deal.getDealTitle(),
                         deal.getDealContent(),
                         deal.getDealFileName(),
@@ -142,8 +139,8 @@ public class DealApiController {
                         deal.getDealNo(),
                         deal.getUser().getUserNo(),
                         deal.getUser().getUserNick(),
-                        deal.getGame().getGameNo(),
-                        deal.getGame().getGameName(),
+                        deal.getGame().getNo(),
+                        deal.getGame().getName(),
                         deal.getDealTitle(),
                         deal.getDealContent(),
                         deal.getDealFileName(),
@@ -170,8 +167,8 @@ public class DealApiController {
                 deal.getDealNo(),
                 deal.getUser().getUserNo(),
                 deal.getUser().getUserNick(),
-                deal.getGame().getGameNo(),
-                deal.getGame().getGameName(),
+                deal.getGame().getNo(),
+                deal.getGame().getName(),
                 deal.getDealTitle(),
                 deal.getDealContent(),
                 deal.getDealFileName(),

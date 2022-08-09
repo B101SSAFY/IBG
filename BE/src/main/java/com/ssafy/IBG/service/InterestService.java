@@ -1,9 +1,9 @@
 package com.ssafy.IBG.service;
 
-import com.ssafy.IBG.domain.Game;
+import com.ssafy.IBG.Game.domain.Game;
 import com.ssafy.IBG.domain.Interest;
 import com.ssafy.IBG.domain.User;
-import com.ssafy.IBG.repository.GameRepository;
+import com.ssafy.IBG.Game.repository.GameRepository;
 import com.ssafy.IBG.repository.InterestRepository;
 import com.ssafy.IBG.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +34,7 @@ public class InterestService {
         try{
             if(interest == null) {
                 User user = userRepository.findUserByUserNo(userNo);
-                Game game = gameRepository.findGameByGameNo(gameNo);
+                Game game = gameRepository.getById(gameNo);
 
                 if(user == null || game == null)
                     return false;

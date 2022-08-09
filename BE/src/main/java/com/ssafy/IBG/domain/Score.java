@@ -1,9 +1,8 @@
 package com.ssafy.IBG.domain;
 
+import com.ssafy.IBG.Game.domain.Game;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 

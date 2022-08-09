@@ -1,12 +1,10 @@
 package com.ssafy.IBG.api.game;
 
 import com.ssafy.IBG.api.review.ReviewResponse;
-import com.ssafy.IBG.domain.Game;
-import com.ssafy.IBG.domain.Review;
+import com.ssafy.IBG.Game.domain.Game;
 import lombok.Data;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Data
 public class GameResponse{
@@ -29,22 +27,22 @@ public class GameResponse{
     private List<ReviewResponse> ResponseReviewList;
 
     public GameResponse(Game game, boolean isLike, List<ReviewResponse> ResponseReviewList, double myScore) {
-        this.gameNo = game.getGameNo();
-        this.gameImg = game.getGameImg();
-        this.gameName = game.getGameName();
-        this.gameKorName = game.getGameKorName();
-        this.gameYear = game.getGameYear();
-        this.gameTotalScore = game.getGameTotalScore();
+        this.gameNo = game.getNo();
+        this.gameImg = game.getImg();
+        this.gameName = game.getName();
+        this.gameKorName = game.getKorName();
+        this.gameYear = game.getYear();
+        this.gameTotalScore = game.getTotalScore();
         this.isLike = isLike;
         this.myScore = myScore;
-        this.gameMinPlayer = game.getGameMinPlayer();
-        this.gameMaxPlayer = game.getGameMaxPlayer();
-        this.gameMinTime = game.getGameMinTime();
-        this.gameMaxTime = game.getGameMaxTime();
-        this.gameWeight = game.getGameWeight();
-        this.gameCategory = game.getGameCategory();
-        this.gameDesc = game.getGameDesc();
-        this.gameKorDesc = game.getGameKorDesc();
+        this.gameMinPlayer = game.getMinPlayer();
+        this.gameMaxPlayer = game.getMaxPlayer();
+        this.gameMinTime = game.getMinTime();
+        this.gameMaxTime = game.getMaxTime();
+        this.gameWeight = game.getWeight();
+        this.gameCategory = game.getCategory();
+        this.gameDesc = game.getEngDesc();
+        this.gameKorDesc = game.getKorDesc();
         this.ResponseReviewList = ResponseReviewList;
     }
 }

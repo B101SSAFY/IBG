@@ -3,11 +3,11 @@ package com.ssafy.IBG.api;
 import com.ssafy.IBG.api.dto.Result;
 import com.ssafy.IBG.api.review.ReviewRequest;
 import com.ssafy.IBG.api.review.ReviewResponse;
-import com.ssafy.IBG.domain.Game;
+import com.ssafy.IBG.Game.domain.Game;
 import com.ssafy.IBG.domain.Review;
 import com.ssafy.IBG.domain.Score;
 import com.ssafy.IBG.domain.User;
-import com.ssafy.IBG.service.GameService;
+import com.ssafy.IBG.Game.service.GameService;
 import com.ssafy.IBG.service.ReviewService;
 import com.ssafy.IBG.service.ScoreService;
 import com.ssafy.IBG.service.UserService;
@@ -37,7 +37,7 @@ public class ReviewApiController {
         List<Review> reviewList = reviewService.getReviewByGameNo(gameNo);
         List<ReviewResponse> collect = reviewList.stream()
                 .map(rl -> {
-                    Score score = scoreService.getScoreByUserNoGameNo(rl.getUser().getUserNo(), rl.getGame().getGameNo());
+                    Score score = scoreService.getScoreByUserNoGameNo(rl.getUser().getUserNo(), rl.getGame().getNo());
                     return new ReviewResponse(rl, score);
                 })
                 .collect(Collectors.toList());

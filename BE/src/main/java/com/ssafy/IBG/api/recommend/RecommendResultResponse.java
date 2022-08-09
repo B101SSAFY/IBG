@@ -1,6 +1,6 @@
 package com.ssafy.IBG.api.recommend;
 
-import com.ssafy.IBG.domain.Game;
+import com.ssafy.IBG.Game.domain.Game;
 import com.ssafy.IBG.domain.Recommend;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,27 +20,27 @@ public class RecommendResultResponse {
     private boolean isLike;
 
     public RecommendResultResponse(Game g, boolean isLike){
-        this.gameNo = g.getGameNo();
-        this.gameName = g.getGameName();
-        this.gameKorName = g.getGameKorName();
-        this.gameCategory = g.getGameCategory();
-        this.gameMinPlayer = g.getGameMinPlayer();
-        this.gameMaxPlayer = g.getGameMaxPlayer();
-        this.gameTotalScore = g.getGameTotalScore();
-        this.gameImg = g.getGameImg();
+        this.gameNo = g.getNo();
+        this.gameName = g.getName();
+        this.gameKorName = g.getKorName();
+        this.gameCategory = g.getCategory();
+        this.gameMinPlayer = g.getMinPlayer();
+        this.gameMaxPlayer = g.getMaxPlayer();
+        this.gameTotalScore = g.getTotalScore();
+        this.gameImg = g.getImg();
         this.isLike = isLike;
     }
 
     public RecommendResultResponse(Recommend r, boolean isLike) {
-        this.gameNo = r.getGame().getGameNo();
-        this.gameName = r.getGame().getGameName();
-        this.gameKorName = r.getGame().getGameKorName();
-        this.gameCategory = r.getGame().getGameCategory();
-        this.gameMinPlayer = r.getGame().getGameMinPlayer();
-        this.gameMaxPlayer = r.getGame().getGameMaxPlayer();
+        this.gameNo = r.getGame().getNo();
+        this.gameName = r.getGame().getName();
+        this.gameKorName = r.getGame().getKorName();
+        this.gameCategory = r.getGame().getCategory();
+        this.gameMinPlayer = r.getGame().getMinPlayer();
+        this.gameMaxPlayer = r.getGame().getMaxPlayer();
         this.predictScore = r.getRecommendRating();
-        this.gameTotalScore = r.getGame().getGameTotalScore();
-        this.gameImg = r.getGame().getGameImg();
+        this.gameTotalScore = r.getGame().getTotalScore();
+        this.gameImg = r.getGame().getImg();
         this.isLike = isLike;
     }
 }

@@ -50,7 +50,7 @@ public class DealRepository {
     **/
     public List<Deal> findDealByGameName(String gameName) {
         try {
-            return em.createQuery("select d from Deal d where d.game.gameName = :gameName", Deal.class)
+            return em.createQuery("select d from Deal d where d.game.name = :gameName", Deal.class)
                     .setParameter("gameName", gameName)
                     .getResultList();
         }catch (NoResultException e) {

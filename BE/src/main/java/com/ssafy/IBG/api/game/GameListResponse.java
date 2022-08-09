@@ -1,6 +1,6 @@
 package com.ssafy.IBG.api.game;
 
-import com.ssafy.IBG.domain.Game;
+import com.ssafy.IBG.Game.domain.Game;
 import lombok.Data;
 
 @Data
@@ -16,14 +16,14 @@ public class GameListResponse{
     private boolean isLike;
 
     public GameListResponse(Game game, boolean isLike) {
-        this.gameNo = game.getGameNo();
-        this.gameName = game.getGameName();
-        this.gameKorName = game.getGameKorName();
-        this.gameCategory = game.getGameCategory();
-        this.gameMinPlayer = game.getGameMinPlayer();
-        this.gameMaxPlayer = game.getGameMaxPlayer();
-        this.gameTotalScore = game.getGameTotalScore();
-        this.gameImg = game.getGameImg();
+        this.gameNo = game.getNo();
+        this.gameName = game.getName();
+        this.gameKorName = game.getKorName();
+        this.gameCategory = game.getCategory();
+        this.gameMinPlayer = game.getMinPlayer();
+        this.gameMaxPlayer = game.getMaxPlayer();
+        this.gameTotalScore = game.getTotalScore();
+        this.gameImg = game.getImg();
         this.isLike = isLike;
     }
 }

@@ -23,7 +23,7 @@ public class ReviewRepository {
      * - desc : order by 추가
      **/
     public List<Review> findReviewByGameNo(int gameNo){
-        List<Review> reviewList = em.createQuery("select r from Review r where r.game.gameNo = :gameNo order by r.reviewNo desc", Review.class)
+        List<Review> reviewList = em.createQuery("select r from Review r where r.game.no = :gameNo order by r.reviewNo desc", Review.class)
                 .setParameter("gameNo", gameNo)
                 .getResultList();
         if(reviewList.size() > 50)

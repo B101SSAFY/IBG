@@ -1,6 +1,6 @@
 package com.ssafy.IBG.service;
 
-import com.ssafy.IBG.domain.Game;
+import com.ssafy.IBG.Game.domain.Game;
 import com.ssafy.IBG.domain.Recommend;
 import com.ssafy.IBG.domain.RecommendCate;
 import com.ssafy.IBG.domain.RecommendDesc;

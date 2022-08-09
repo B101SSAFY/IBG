@@ -1,6 +1,8 @@
 package com.ssafy.IBG.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.ssafy.IBG.Game.domain.Game;
+import com.ssafy.IBG.Game.service.GameService;
 import com.ssafy.IBG.api.dto.Result;
 import com.ssafy.IBG.api.recommend.RecommendResultResponse;
 import com.ssafy.IBG.api.recommend.RecommendResultResponseWithTarget;
@@ -45,7 +47,7 @@ public class RecommendApiController {
 
         List<RecommendSurveyResponse> collect = list.stream()
                 .map(g -> {
-                    return new RecommendSurveyResponse(g.getGameNo(), g.getGameName(), g.getGameKorName(), g.getGameImg());
+                    return new RecommendSurveyResponse(g.getNo(), g.getName(), g.getKorName(), g.getImg());
                 })
                 .collect(Collectors.toList());
 
@@ -109,10 +111,10 @@ public class RecommendApiController {
         }else{
             double random = Math.random();
             int n = (int)(random*scoreList.size());
-            gameNo = scoreList.get(n).getGame().getGameNo();
+            gameNo = scoreList.get(n).getGame().getNo();
         }
 
-        String target = gameService.getGameByGameNo(gameNo).getGameKorName();
+        String target = gameService.getGameByGameNo(gameNo).getKorName();
 
         List<RecommendDesc> recommendDescList = recommendService.getRecommendDescByGameNo(gameNo);
 
@@ -179,7 +181,7 @@ public class RecommendApiController {
 
         double weight = 0d;
         for(Score score : scores){
-            weight += score.getGame().getGameWeight();
+            weight += score.getGame().getWeight();
         }
 
         weight /= scores.size();
@@ -213,7 +215,7 @@ public class RecommendApiController {
             return new Result(HttpStatus.NO_CONTENT.value());
 
         int num = (int)(Math.random()*(scores.size()));
-        int game_no = scores.get(num).getGame().getGameNo();
+        int game_no = scores.get(num).getGame().getNo();
 
 //        List<Integer> list = restapiService.requestGETAPI("/category", game_no);
         List<RecommendCate> cateList = recommendService.getRecommendCateByGameNo(game_no);
@@ -226,7 +228,7 @@ public class RecommendApiController {
                 .map(cl -> cl.getRecGame())
                 .collect(Collectors.toList());
 
-        String target = gameService.getGameByGameNo(game_no).getGameKorName();
+        String target = gameService.getGameByGameNo(game_no).getKorName();
 
         return getRecommendGameList(userNo, gameList, target);
     }
@@ -248,8 +250,8 @@ public class RecommendApiController {
 
         for(Score score : scores){
             Game game = score.getGame();
-            minPlayers += (double) game.getGameMinPlayer();
-            maxPlayers += (double) game.getGameMaxPlayer();
+            minPlayers += (double) game.getMinPlayer();
+            maxPlayers += (double) game.getMaxPlayer();
         }
         minPlayers /= scores.size();
         maxPlayers /= scores.size();
@@ -285,8 +287,8 @@ public class RecommendApiController {
 
         for(Score score : scores){
             Game game = score.getGame();
-            minPlayTime += game.getGameMinTime();
-            maxPlayTime += game.getGameMaxTime();
+            minPlayTime += game.getMinTime();
+            maxPlayTime += game.getMaxTime();
         }
         minPlayTime /= scores.size();
         maxPlayTime /= scores.size();
@@ -320,7 +322,7 @@ public class RecommendApiController {
 
         for(Score score : scores){
             Game game = score.getGame();
-            gameAgeAvg += game.getGameAge();
+            gameAgeAvg += game.getAge();
         }
         gameAgeAvg /= scores.size();
 
@@ -388,7 +390,7 @@ public class RecommendApiController {
         List<Game> recommend_list = new LinkedList<>();
 
         for(Game g : list){
-            if(scoreService.getScoreByUserNoGameNo(userNo, g.getGameNo()).getScoreRating() == 0d){
+            if(scoreService.getScoreByUserNoGameNo(userNo, g.getNo()).getScoreRating() == 0d){
                 recommend_list.add(g);
             }
         }
@@ -415,7 +417,7 @@ public class RecommendApiController {
         List<Game> recommend_list = new LinkedList<>();
 
         for(Game g : list){
-            if(scoreService.getScoreByUserNoGameNo(userNo, g.getGameNo()).getScoreRating() == 0d){
+            if(scoreService.getScoreByUserNoGameNo(userNo, g.getNo()).getScoreRating() == 0d){
                 recommend_list.add(g);
             }
         }
@@ -443,7 +445,7 @@ public class RecommendApiController {
                     if(userNo == null)
                         return new RecommendResultResponse(g, false);
 
-                    return new RecommendResultResponse(g, interestService.getIsLike(userNo, g.getGameNo()));
+                    return new RecommendResultResponse(g, interestService.getIsLike(userNo, g.getNo()));
                 })
                 .collect(Collectors.toList());
         return new Result(HttpStatus.OK.value(), collect);
@@ -457,7 +459,7 @@ public class RecommendApiController {
     private Result getResultList(List<Game> list, Integer userNo, String target){
         List<RecommendResultResponse> collect = list.stream()
                 .map(g-> {
-                    return new RecommendResultResponse(g, interestService.getIsLike(userNo, g.getGameNo()));
+                    return new RecommendResultResponse(g, interestService.getIsLike(userNo, g.getNo()));
                 })
                 .collect(Collectors.toList());
         return new Result(HttpStatus.OK.value(), new RecommendResultResponseWithTarget(target, collect));

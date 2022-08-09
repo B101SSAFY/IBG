@@ -32,7 +32,7 @@ public class ScoreRepository {
      * */
     public Score findScoreByUserNoGameNo(Integer userNo, Integer gameNo){
         try {
-            return em.createQuery("select s from Score s where s.user.userNo =: userNo and s.game.gameNo =: gameNo", Score.class)
+            return em.createQuery("select s from Score s where s.user.userNo =: userNo and s.game.no =: gameNo", Score.class)
                     .setParameter("userNo", userNo)
                     .setParameter("gameNo", gameNo)
                     .getSingleResult();

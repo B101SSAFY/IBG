@@ -1,7 +1,7 @@
 package com.ssafy.IBG.service;
 
 import com.ssafy.IBG.domain.Score;
-import com.ssafy.IBG.repository.GameRepository;
+import com.ssafy.IBG.Game.repository.GameRepository;
 import com.ssafy.IBG.repository.ScoreRepository;
 import com.ssafy.IBG.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +33,7 @@ public class ScoreService {
             return true;
         }
 
-        return scoreRepository.saveScore(new Score(userRepository.findUserByUserNo(userNo), gameRepository.findGameByGameNo(gameNo), scoreRating));
+        return scoreRepository.saveScore(new Score(userRepository.findUserByUserNo(userNo), gameRepository.findById(gameNo).get(), scoreRating));
     }
 
     /**

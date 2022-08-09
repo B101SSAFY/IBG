@@ -1,12 +1,12 @@
-package com.ssafy.IBG.api;
+package com.ssafy.IBG.Game.controller;
 
 import com.ssafy.IBG.api.game.*;
 import com.ssafy.IBG.api.review.ReviewResponse;
-import com.ssafy.IBG.domain.Game;
+import com.ssafy.IBG.Game.domain.Game;
 import com.ssafy.IBG.api.dto.Result;
 import com.ssafy.IBG.domain.Review;
 import com.ssafy.IBG.domain.Score;
-import com.ssafy.IBG.service.GameService;
+import com.ssafy.IBG.Game.service.GameService;
 import com.ssafy.IBG.service.InterestService;
 import com.ssafy.IBG.service.ReviewService;
 import com.ssafy.IBG.service.ScoreService;
@@ -79,17 +79,17 @@ public class GameApiController {
             return new Result(HttpStatus.NO_CONTENT.value());
         }else{
             /** gameNo와 userNo **/
-            boolean isLike = interestService.getIsLike(request.getUserNo(), game.getGameNo());
-            Score myScore = scoreService.getScoreByUserNoGameNo(request.getUserNo(), game.getGameNo());
+            boolean isLike = interestService.getIsLike(request.getUserNo(), game.getNo());
+            Score myScore = scoreService.getScoreByUserNoGameNo(request.getUserNo(), game.getNo());
             return getResult2(game, isLike, myScore.getScoreRating());
         }
     }
 
     private Result getResult2(Game game, boolean isLike, double myScore) {
-        List<Review> reviewList = reviewService.getReviewByGameNo(game.getGameNo());
+        List<Review> reviewList = reviewService.getReviewByGameNo(game.getNo());
         List<ReviewResponse> collect = reviewList.stream()
                 .map(rl -> {
-                    Score score = scoreService.getScoreByUserNoGameNo(rl.getUser().getUserNo(), rl.getGame().getGameNo());
+                    Score score = scoreService.getScoreByUserNoGameNo(rl.getUser().getUserNo(), rl.getGame().getNo());
                     return new ReviewResponse(rl, score);
                 }).collect(Collectors.toList());
         return new Result(HttpStatus.OK.value(), new GameResponse(game, isLike, collect, myScore));
@@ -116,7 +116,7 @@ public class GameApiController {
         }else{
             /** gameNo와 userNo **/
             boolean isLike = interestService.getIsLike(userNo, gameNo);
-            Score myScore = scoreService.getScoreByUserNoGameNo(userNo, game.getGameNo());
+            Score myScore = scoreService.getScoreByUserNoGameNo(userNo, game.getNo());
             return getResult2(game, isLike, myScore.getScoreRating());
         }
     }
@@ -147,7 +147,7 @@ public class GameApiController {
         }else{
             List<GameListResponse> collect = gameList.stream()
                     .map(gl -> {
-                        boolean isLike = interestService.getIsLike(userNo, gl.getGameNo());
+                        boolean isLike = interestService.getIsLike(userNo, gl.getNo());
                         return new GameListResponse(gl, isLike);
                     })
                     .collect(Collectors.toList());

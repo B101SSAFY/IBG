@@ -1,6 +1,6 @@
 package com.ssafy.IBG.api.game;
 
-import com.ssafy.IBG.domain.Game;
+import com.ssafy.IBG.Game.domain.Game;
 import lombok.Data;
 
 @Data
@@ -11,8 +11,8 @@ public class SearchAutoResponse {
     private int gameNo;
 
     public SearchAutoResponse(Game game) {
-        this.gameName = game.getGameName();
-        this.gameKorName = game.getGameKorName();
-        this.gameNo = game.getGameNo();
+        this.gameName = game.getName();
+        this.gameKorName = game.getKorName();
+        this.gameNo = game.getNo();
     }
 }

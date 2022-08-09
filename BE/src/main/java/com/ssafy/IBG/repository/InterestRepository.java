@@ -1,11 +1,8 @@
 package com.ssafy.IBG.repository;
 
-import com.ssafy.IBG.domain.Game;
 import com.ssafy.IBG.domain.Interest;
-import com.ssafy.IBG.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -36,7 +33,7 @@ public class InterestRepository {
      * */
     public Interest findInterestByUserNoGameNo(Integer userNo, Integer gameNo){
         try {
-            return em.createQuery("select i from Interest i where i.user.userNo =: userNo and i.game.gameNo =: gameNo", Interest.class)
+            return em.createQuery("select i from Interest i where i.user.userNo =: userNo and i.game.no =: gameNo", Interest.class)
                     .setParameter("userNo", userNo)
                     .setParameter("gameNo", gameNo)
                     .getSingleResult();

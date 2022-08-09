@@ -41,6 +41,9 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 
+	testImplementation('org.projectlombok:lombok')
+	testAnnotationProcessor('org.projectlombok:lombok')
+
 	// Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -58,7 +61,8 @@ dependencies {
 
 }
 
-tasks.named('test') {
+// for Junit 5
+test { // (2)
 	useJUnitPlatform()
 }
 

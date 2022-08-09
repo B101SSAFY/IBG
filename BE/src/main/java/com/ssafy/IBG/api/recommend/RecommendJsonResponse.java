@@ -1,7 +1,7 @@
 package com.ssafy.IBG.api.recommend;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ssafy.IBG.domain.Game;
+import com.ssafy.IBG.Game.domain.Game;
 import com.ssafy.IBG.domain.User;
 import lombok.Data;
 

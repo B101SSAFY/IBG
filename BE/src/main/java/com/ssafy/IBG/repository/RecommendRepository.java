@@ -1,6 +1,6 @@
 package com.ssafy.IBG.repository;
 
-import com.ssafy.IBG.domain.Game;
+import com.ssafy.IBG.Game.domain.Game;
 import com.ssafy.IBG.domain.Recommend;
 import com.ssafy.IBG.domain.RecommendCate;
 import com.ssafy.IBG.domain.RecommendDesc;
@@ -26,7 +26,7 @@ public class RecommendRepository {
      **/
     public List<Game> findGameForSurvey(int limit){
         // 기본 지정 데이터 30개
-        List<Game> selectedList = em.createQuery("select g from Game g where g.gameNo < 31", Game.class)
+        List<Game> selectedList = em.createQuery("select g from Game g where g.no < 31", Game.class)
                 .getResultList();
 
         // 전체 데이터 수
@@ -45,7 +45,7 @@ public class RecommendRepository {
         }
 
         // 랜덤하게 뽑은 게임 번호로 게임 검색
-        List<Game> randomList = em.createQuery("SELECT g FROM Game g WHERE g.gameNo IN :indexs", Game.class)
+        List<Game> randomList = em.createQuery("SELECT g FROM Game g WHERE g.no IN :indexs", Game.class)
                 .setParameter("indexs", index)
                 .getResultList();
 
@@ -73,7 +73,7 @@ public class RecommendRepository {
      * @date : 2022-03-25 오전 15:00
      **/
     public List<Game> findRecommendByRanking(int limit) {
-        return em.createQuery("select g from Game g order by g.gameTotalScore desc", Game.class)
+        return em.createQuery("select g from Game g order by g.totalScore desc", Game.class)
                 .setMaxResults(limit)
                 .getResultList();
     }
@@ -89,7 +89,7 @@ public class RecommendRepository {
     }
 
     public List<Game> findRecommendByWeight(int userNo, double positiveRange, double negativeRange, int limit) {
-        return em.createQuery("select g from Game g where g.gameTotalScore < :positiveRange and g.gameTotalScore > :negativeRange order by g.gameTotalScore desc", Game.class)
+        return em.createQuery("select g from Game g where g.totalScore < :positiveRange and g.totalScore > :negativeRange order by g.totalScore desc", Game.class)
                 .setParameter("positiveRange", positiveRange)
                 .setParameter("negativeRange", negativeRange)
                 .setMaxResults(limit)
@@ -97,7 +97,7 @@ public class RecommendRepository {
     }
 
     public List<Game> findRecommendByPlayer(Integer userNo, int maxPlayers, int minPlayers, int limit) {
-        return em.createQuery("select g from Game g where g.gameMinPlayer >= :minPlayers and g.gameMaxPlayer <= :maxPlayers order by g.gameTotalScore desc", Game.class)
+        return em.createQuery("select g from Game g where g.minPlayer >= :minPlayers and g.maxPlayer <= :maxPlayers order by g.totalScore desc", Game.class)
                 .setParameter("minPlayers", minPlayers)
                 .setParameter("maxPlayers", maxPlayers)
                 .setMaxResults(limit)
@@ -105,7 +105,7 @@ public class RecommendRepository {
     }
 
     public List<Game> findRecommendByPlayTime(Integer userNo, int maxPlayTime, int minPlayTime, int limit) {
-        return em.createQuery("select g from Game g where g.gameMinTime >= :minPlayTime and g.gameMaxTime <= :maxPlayTime order by g.gameTotalScore desc", Game.class)
+        return em.createQuery("select g from Game g where g.minTime >= :minPlayTime and g.maxTime <= :maxPlayTime order by g.totalScore desc", Game.class)
                 .setParameter("minPlayTime", minPlayTime)
                 .setParameter("maxPlayTime", maxPlayTime)
                 .setMaxResults(limit)
@@ -113,7 +113,7 @@ public class RecommendRepository {
     }
 
     public List<Game> findRecommendByAge(Integer userNo, int positiveRange, int negativeRange, int limit) {
-        return em.createQuery("select g from Game g where g.gameAge <= :positiveRange and g.gameAge >= :negativeRange order by g.gameTotalScore desc", Game.class)
+        return em.createQuery("select g from Game g where g.age <= :positiveRange and g.age >= :negativeRange order by g.totalScore desc", Game.class)
                 .setParameter("positiveRange", positiveRange)
                 .setParameter("negativeRange", negativeRange)
                 .setMaxResults(limit)
@@ -121,20 +121,20 @@ public class RecommendRepository {
     }
 
     public List<Game> findRecommendByNewbie(Integer userNo, double gameAgeWeight, int limit) {
-        return em.createQuery("select g from Game g where g.gameWeight <= :gameAgeWeight order by g.gameTotalScore desc", Game.class)
+        return em.createQuery("select g from Game g where g.weight <= :gameAgeWeight order by g.totalScore desc", Game.class)
                 .setParameter("gameAgeWeight", gameAgeWeight)
                 .setMaxResults(limit)
                 .getResultList();
     }
 
     public List<RecommendDesc> findRecommendDescByGameNo(int gameNo) {
-        return em.createQuery("select rd from RecommendDesc rd where rd.targetGame.gameNo = :gameNo", RecommendDesc.class)
+        return em.createQuery("select rd from RecommendDesc rd where rd.targetGame.no = :gameNo", RecommendDesc.class)
                 .setParameter("gameNo", gameNo)
                 .getResultList();
     }
 
     public List<RecommendCate> findRecommendCateByGameNo(Integer gameNo) {
-        return em.createQuery("select rc from RecommendCate rc where rc.targetGame.gameNo = :gameNo", RecommendCate.class)
+        return em.createQuery("select rc from RecommendCate rc where rc.targetGame.no = :gameNo", RecommendCate.class)
                 .setParameter("gameNo", gameNo)
                 .setMaxResults(20)
                 .getResultList();

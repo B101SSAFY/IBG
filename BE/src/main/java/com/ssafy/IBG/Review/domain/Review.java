@@ -1,7 +1,11 @@
-package com.ssafy.IBG.domain;
+package com.ssafy.IBG.Review.domain;
 
+import com.ssafy.IBG.Game.domain.BaseTimeEntity;
 import com.ssafy.IBG.Game.domain.Game;
+import com.ssafy.IBG.domain.User;
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -9,15 +13,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+@Getter
 @Entity
-@Data
-@Table
 @NoArgsConstructor
-public class Review {
+public class Review extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int reviewNo;
+    private int no;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "userNo")
@@ -28,21 +31,14 @@ public class Review {
     private Game game;
 
     @Column(length = 6000)
-    private String reviewContent;
+    private String content;
 
-    //    @Temporal(TemporalType.TIMESTAMP)
-    private String reviewReg;
-
+    @Builder
     public Review(User user, Game game, String reviewContent) {
         this.user = user;
         this.game = game;
-        this.reviewContent = reviewContent;
-        Date now = new Date();
-        SimpleDateFormat date = new SimpleDateFormat("MMM yyyy", Locale.US);
-        String strDate = date.format(now);
-        this.reviewReg = strDate;
+        this.content = reviewContent;
     }
 
-
-
 }
+

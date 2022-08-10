@@ -1,6 +1,6 @@
-package com.ssafy.IBG.api.game;
+package com.ssafy.IBG.Game.dto;
 
-import com.ssafy.IBG.api.review.ReviewResponse;
+import com.ssafy.IBG.Review.dto.ReviewResponse;
 import com.ssafy.IBG.Game.domain.Game;
 import lombok.Data;
 

@@ -6,17 +6,14 @@ import com.ssafy.IBG.Game.dto.*;
 import com.ssafy.IBG.Game.repository.GameRepository;
 import com.ssafy.IBG.Game.repository.GameRepositorySupport;
 import com.ssafy.IBG.Review.dto.ReviewResponse;
-import com.ssafy.IBG.Review.domain.Review;
 import com.ssafy.IBG.Score.domain.Score;
 import com.ssafy.IBG.Score.repository.ScoreRepository;
-import com.ssafy.IBG.repository.InterestRepository;
 import com.ssafy.IBG.Review.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,14 +22,8 @@ import java.util.stream.Collectors;
 public class GameService {
 
     private final GameRepository gameRepository;
-
-    private final InterestRepository interestRepository;
-
     private final ReviewRepository reviewRepository;
-
     private final ScoreRepository scoreRepository;
-
-
     private final GameRepositorySupport gameRepositorySupport;
 
     public List<GameListResponse> getGameSearchGame(SearchNameRequest request){
@@ -44,7 +35,7 @@ public class GameService {
 
     public List<SearchAutoResponse> getGameList(){
         return gameRepository.findAll().stream()
-                .map(game -> SearchAutoResponse.builder().game(game).build())
+                .map(game -> new SearchAutoResponse(game))
                 .collect(Collectors.toList());
     }
 
@@ -67,11 +58,6 @@ public class GameService {
     }
 
 
-    /**
-     * @author : 박민주
-     * @date : 2022-03-23 오후 5:49
-     * @desc: 게임 번호 상세보기
-     **/
     public GameResponse getGameByGameNo(int gameNo, int userNo){
         Game game = gameRepository.findById(gameNo)
                 .orElseThrow(() -> new IllegalArgumentException(MISSMATCH_NO_ERROR_MESSAGE));
@@ -90,15 +76,10 @@ public class GameService {
                 scoreRepository.findByUser_UserNoAndGame_No(userNo, game.getNo()).orElse(Score.builder().build()).getRating());
     }
 
-    /**
-     * @author : 박민주
-     * @date : 2022-03-23 오후 5:49
-     * @desc: 검색 상세 필터
-     **/
     public List<GameListResponse> getGameByFilter(SearchFilterRequest request) {
         return gameRepositorySupport.findGameByFilter(request)
                 // TODO: interest 변경
-                .stream().map(game -> GameListResponse.builder().game(game).isLike(false).build())
+                .stream().map(game -> new GameListResponse(game, false))
                 .collect(Collectors.toList());
     }
 

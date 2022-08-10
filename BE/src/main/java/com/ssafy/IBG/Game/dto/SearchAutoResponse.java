@@ -14,7 +14,6 @@ public class SearchAutoResponse {
     private String gameKorName;
     private int gameNo;
 
-    @Builder
     public SearchAutoResponse(Game game) {
         this.gameName = game.getName();
         this.gameKorName = game.getKorName();

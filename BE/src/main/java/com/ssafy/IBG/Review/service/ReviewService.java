@@ -29,10 +29,6 @@ public class ReviewService {
     private final UserRepository userRepository;
     private final ScoreRepository scoreRepository;
 
-    /**
-    * @author : 박민주
-    * @date : 2022-03-23 오후 6:24
-    **/
     public List<ReviewResponse> getReviewByGameNo(int gameNo){
         // TODO: join
         return reviewRepository.findByGame_NoOrderByNoDesc(gameNo).stream()

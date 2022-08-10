@@ -1,15 +1,7 @@
 package com.ssafy.IBG.Game.controller;
 
 import com.ssafy.IBG.Game.dto.*;
-import com.ssafy.IBG.Review.dto.ReviewResponse;
-import com.ssafy.IBG.Game.domain.Game;
-import com.ssafy.IBG.api.dto.Result;
-import com.ssafy.IBG.Review.domain.Review;
-import com.ssafy.IBG.Score.domain.Score;
 import com.ssafy.IBG.Game.service.GameService;
-import com.ssafy.IBG.service.InterestService;
-import com.ssafy.IBG.Review.service.ReviewService;
-import com.ssafy.IBG.Score.service.ScoreService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RequestMapping("/game")
 @Api(tags = "게임")
@@ -27,9 +18,6 @@ import java.util.stream.Collectors;
 public class GameApiController {
 
     private final GameService gameService;
-    private final ReviewService reviewService;
-    private final InterestService interestService;
-    private final ScoreService scoreService;
 
     @ApiOperation(value = "게임 이름 자동완성 조회", notes = "검색 내용을 포함한 게임 리스트")
     @PostMapping("/search/auto")

@@ -1,9 +1,13 @@
-package com.ssafy.IBG.api.game;
+package com.ssafy.IBG.Game.dto;
 
 import com.ssafy.IBG.Game.domain.Game;
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Data
+@Getter
+@NoArgsConstructor
 public class GameListResponse{
     private int gameNo;
     private String gameName;
@@ -15,6 +19,7 @@ public class GameListResponse{
     private String gameImg;
     private boolean isLike;
 
+    @Builder
     public GameListResponse(Game game, boolean isLike) {
         this.gameNo = game.getNo();
         this.gameName = game.getName();

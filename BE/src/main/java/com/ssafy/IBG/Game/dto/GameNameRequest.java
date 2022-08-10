@@ -1,4 +1,4 @@
-package com.ssafy.IBG.api.game;
+package com.ssafy.IBG.Game.dto;
 
 import lombok.Data;
 

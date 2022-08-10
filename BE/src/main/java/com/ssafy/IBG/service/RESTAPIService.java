@@ -1,7 +1,6 @@
 package com.ssafy.IBG.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.ssafy.IBG.api.game.GameListResponse;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

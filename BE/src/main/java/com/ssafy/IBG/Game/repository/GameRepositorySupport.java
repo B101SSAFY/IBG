@@ -3,6 +3,7 @@ package com.ssafy.IBG.Game.repository;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.IBG.Game.domain.Game;
+import com.ssafy.IBG.Game.dto.SearchFilterRequest;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +14,7 @@ import java.util.List;
 @Repository
 public class GameRepositorySupport extends QuerydslRepositorySupport {
 
-    private JPAQueryFactory jpaQueryFactory;
+    private final JPAQueryFactory jpaQueryFactory;
 
     public GameRepositorySupport(JPAQueryFactory jpaQueryFactory) {
         super(Game.class);
@@ -26,34 +27,34 @@ public class GameRepositorySupport extends QuerydslRepositorySupport {
                 .fetch();
     }
 
-    public List<Game> findGameByFilter(String gameName, String gameKorName, Integer gamePlayer, Integer gameTime, Double gameWeight, Integer gameAge, Double gameScore, List<String> gameCategory) {
+    public List<Game> findGameByFilter(SearchFilterRequest request) {
 
 
         BooleanBuilder builder = new BooleanBuilder();
 
-        if(gameName != null){
-            builder.and(game.name.contains(gameName));
+        if(request.getGameName() != null){
+            builder.and(game.name.contains(request.getGameName()));
         }
-        if (gameKorName != null){
-            builder.and(game.korName.contains(gameKorName));
+        if (request.getGameKorName() != null){
+            builder.and(game.korName.contains(request.getGameKorName()));
         }
-        if(gamePlayer != null){
-            builder.and(game.minPlayer.goe(gamePlayer));
+        if(request.getGamePlayer() != null){
+            builder.and(game.minPlayer.goe(request.getGamePlayer()));
         }
-        if(gameTime != null){
-            builder.and(game.maxTime.goe(gameTime));
+        if(request.getGameTime() != null){
+            builder.and(game.maxTime.goe(request.getGameTime()));
         }
-        if(gameAge != null){
-            builder.and(game.age.loe(gameAge));
+        if(request.getGameAge() != null){
+            builder.and(game.age.loe(request.getGameAge()));
         }
-        if(gameWeight != null){
-            builder.and(game.weight.loe(gameWeight));
+        if(request.getGameWeight() != null){
+            builder.and(game.weight.loe(request.getGameWeight()));
         }
-        if(gameScore != null){
-            builder.and(game.totalScore.goe(gameScore));
+        if(request.getGameScore() != null){
+            builder.and(game.totalScore.goe(request.getGameScore()));
         }
-        if(gameCategory != null){
-            for (String c : gameCategory) {
+        if(request.getGameCategory() != null){
+            for (String c : request.getGameCategory()) {
                 builder.and(game.category.contains(c));
             }
         }

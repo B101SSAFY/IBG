@@ -44,10 +44,11 @@ public class DealApiController {
         Deal deal = new Deal();
 
         User user = userService.getUserByUserNo(request.getUserNo());
-        Game game = gameService.getGameByGameNo(request.getGameNo());
+        // TODO: 추가 수정 필요
+//        Game game = gameService.getGameByGameNo(request.getGameNo());
 
         deal.setUser(user);
-        deal.setGame(game);
+//        deal.setGame(game);
         deal.setDealTitle(request.getDealTitle());
         deal.setDealContent(request.getDealContent());
         deal.setDealPrice(request.getDealPrice());

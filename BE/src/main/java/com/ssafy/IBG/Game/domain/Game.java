@@ -1,6 +1,6 @@
 package com.ssafy.IBG.Game.domain;
 
-import com.ssafy.IBG.domain.Review;
+import com.ssafy.IBG.Review.domain.Review;
 import lombok.Getter;
 
 import javax.persistence.*;

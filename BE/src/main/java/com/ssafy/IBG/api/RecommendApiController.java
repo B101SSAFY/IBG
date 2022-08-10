@@ -3,6 +3,8 @@ package com.ssafy.IBG.api;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ssafy.IBG.Game.domain.Game;
 import com.ssafy.IBG.Game.service.GameService;
+import com.ssafy.IBG.Score.domain.Score;
+import com.ssafy.IBG.Score.service.ScoreService;
 import com.ssafy.IBG.api.dto.Result;
 import com.ssafy.IBG.api.recommend.RecommendResultResponse;
 import com.ssafy.IBG.api.recommend.RecommendResultResponseWithTarget;
@@ -114,7 +116,9 @@ public class RecommendApiController {
             gameNo = scoreList.get(n).getGame().getNo();
         }
 
-        String target = gameService.getGameByGameNo(gameNo).getKorName();
+        //TODO: 추가 수정 필요
+//        String target = gameService.getGameByGameNo(gameNo).getKorName();
+        String target = "";
 
         List<RecommendDesc> recommendDescList = recommendService.getRecommendDescByGameNo(gameNo);
 
@@ -228,7 +232,9 @@ public class RecommendApiController {
                 .map(cl -> cl.getRecGame())
                 .collect(Collectors.toList());
 
-        String target = gameService.getGameByGameNo(game_no).getKorName();
+//        String target = gameService.getGameByGameNo(game_no).getKorName();
+        // TODO: 추가 수정 필요
+        String target = "";
 
         return getRecommendGameList(userNo, gameList, target);
     }
@@ -390,7 +396,7 @@ public class RecommendApiController {
         List<Game> recommend_list = new LinkedList<>();
 
         for(Game g : list){
-            if(scoreService.getScoreByUserNoGameNo(userNo, g.getNo()).getScoreRating() == 0d){
+            if(scoreService.getScoreByUserNoGameNo(userNo, g.getNo()).getRating() == 0d){
                 recommend_list.add(g);
             }
         }
@@ -417,7 +423,7 @@ public class RecommendApiController {
         List<Game> recommend_list = new LinkedList<>();
 
         for(Game g : list){
-            if(scoreService.getScoreByUserNoGameNo(userNo, g.getNo()).getScoreRating() == 0d){
+            if(scoreService.getScoreByUserNoGameNo(userNo, g.getNo()).getRating() == 0d){
                 recommend_list.add(g);
             }
         }

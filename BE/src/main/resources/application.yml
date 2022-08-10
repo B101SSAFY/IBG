@@ -6,8 +6,8 @@ spring:
     password: ssafyB101!
   jpa:
     hibernate:
-#      ddl-auto: update
-      ddl-auto: create
+      ddl-auto: update
+#      ddl-auto: create
     properties:
       hibernate:
         #        show_sql: true
@@ -17,14 +17,19 @@ spring:
       max-file-size: 50MB
       max-request-size: 50MB
 
+# swagger
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
 server:
   port: 7777
   servlet:
     context-path: /ibg/api/v2
 
 
-
 logging:
   level:
     org.hibernate.SQL: debug
 #    org.hibernate.type: trace
+

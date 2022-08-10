@@ -1,20 +1,22 @@
-package com.ssafy.IBG.domain;
+package com.ssafy.IBG.Score.domain;
 
 import com.ssafy.IBG.Game.domain.Game;
-import lombok.Data;
+import com.ssafy.IBG.domain.User;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 import static javax.persistence.FetchType.LAZY;
 
+@Getter
 @Entity
-@Data
 @NoArgsConstructor
 public class Score {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int scoreNo;
+    private int no;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "userNo")
@@ -24,12 +26,18 @@ public class Score {
     @JoinColumn(name = "gameNo")
     private Game game;
 
-    private double scoreRating;
+    private double rating;
 
-    public Score(User user, Game game, int scoreRating){
+    @Builder
+    public Score(User user, Game game, int rating){
         this.user = user;
         this.game = game;
-        this.scoreRating = scoreRating;
+        this.rating = rating;
+    }
+
+    public Score updateScore(int rating){
+        this.rating = rating;
+        return this;
     }
 
 }

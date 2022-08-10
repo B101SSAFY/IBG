@@ -1,6 +1,8 @@
 package com.ssafy.IBG.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.ssafy.IBG.Score.dto.ScoreRequest;
+import com.ssafy.IBG.Score.service.ScoreService;
 import com.ssafy.IBG.api.user.*;
 import com.ssafy.IBG.domain.Interest;
 import com.ssafy.IBG.api.dto.Result;
@@ -129,27 +131,5 @@ public class UserApiController {
         return new Result(HttpStatus.OK.value(), collect);
     }
 
-    /**
-     * @author : 권오범
-     * @date : 2022-03-23
-     * @desc: 유저의 게임별 별점 등록 및 수정
-     * @modify :
-     * - author : 박민주
-     * - date : 2022-04-01 오후 3:47
-     * - desc : 평점 개수가 10개 이상일 경우 장고를 이용한 추천
-     **/
-    @PostMapping("/user/score")
-    public Result setScore(@RequestBody UserScoreRequest request) throws JsonProcessingException {
-        if(!scoreService.registScore(request.getUserNo(), request.getGameNo(), request.getScoreRating()))
-            return new Result(HttpStatus.CONFLICT.value());
-
-        if(scoreService.getScoreCnt(request.getUserNo()) == 10){
-            System.out.println("유저의 평점 데이터가 10보다 크니 장고 실행");
-            List<Integer> gameNoList = restapiService.requestGETAPI("/user3", request.getUserNo());
-
-        }
-
-        return new Result(HttpStatus.OK.value());
-    }
 
 }

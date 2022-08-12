@@ -45,7 +45,7 @@ public class GameService {
         // TODO: left join dsl 구현
         List<ReviewResponse> reviewList = reviewRepository.findByGame_NoOrderByNoDesc(game.getNo()).stream()
                 .map(review -> {
-                    Score score = scoreRepository.findByUser_UserNoAndGame_No(review.getUser().getUserNo(), game.getNo())
+                    Score score = scoreRepository.findByUser_NoAndGame_No(review.getUser().getNo(), game.getNo())
                             .orElse(Score.builder().build());
                     return new ReviewResponse(review, score);
                 }).collect(Collectors.toList());
@@ -54,7 +54,7 @@ public class GameService {
         return new GameResponse(game,
                 false,
                 reviewList,
-                scoreRepository.findByUser_UserNoAndGame_No(request.getUserNo(), game.getNo()).orElse(Score.builder().build()).getRating());
+                scoreRepository.findByUser_NoAndGame_No(request.getUserNo(), game.getNo()).orElse(Score.builder().build()).getRating());
     }
 
 
@@ -64,7 +64,7 @@ public class GameService {
         // TODO: left join dsl 구현
         List<ReviewResponse> reviewList = reviewRepository.findByGame_NoOrderByNoDesc(game.getNo()).stream()
                 .map(review -> {
-                    Score score = scoreRepository.findByUser_UserNoAndGame_No(review.getUser().getUserNo(), game.getNo())
+                    Score score = scoreRepository.findByUser_NoAndGame_No(review.getUser().getNo(), game.getNo())
                             .orElse(Score.builder().build());
                     return new ReviewResponse(review, score);
                 }).collect(Collectors.toList());
@@ -73,7 +73,7 @@ public class GameService {
         return new GameResponse(game,
                 false,
                 reviewList,
-                scoreRepository.findByUser_UserNoAndGame_No(userNo, game.getNo()).orElse(Score.builder().build()).getRating());
+                scoreRepository.findByUser_NoAndGame_No(userNo, game.getNo()).orElse(Score.builder().build()).getRating());
     }
 
     public List<GameListResponse> getGameByFilter(SearchFilterRequest request) {

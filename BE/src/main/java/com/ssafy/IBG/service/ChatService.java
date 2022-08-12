@@ -1,12 +1,13 @@
 package com.ssafy.IBG.service;
 
+import com.ssafy.IBG.User.exception.NotFoundUserException;
 import com.ssafy.IBG.domain.Chat;
 import com.ssafy.IBG.domain.Deal;
 import com.ssafy.IBG.domain.Log;
-import com.ssafy.IBG.domain.User;
+import com.ssafy.IBG.User.domain.User;
 import com.ssafy.IBG.repository.ChatRepository;
 import com.ssafy.IBG.repository.DealRepository;
-import com.ssafy.IBG.repository.UserRepository;
+import com.ssafy.IBG.User.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,7 +42,8 @@ public class ChatService {
         Chat chat = new Chat();
         Deal deal = dealRepository.findDealByDealNo(dealNo);
         chat.setDeal(deal);
-        User user = userRepository.findUserByUserNo(userNo);
+        User user = userRepository.findById(userNo)
+                .orElseThrow(NotFoundUserException::new);
         chat.setUser(user);
         return chatRepository.saveNewChat(chat);
     }

@@ -4,11 +4,10 @@ import com.ssafy.IBG.api.deal.*;
 import com.ssafy.IBG.api.dto.Result;
 import com.ssafy.IBG.domain.Deal;
 import com.ssafy.IBG.domain.DealReview;
-import com.ssafy.IBG.Game.domain.Game;
-import com.ssafy.IBG.domain.User;
+import com.ssafy.IBG.User.domain.User;
 import com.ssafy.IBG.service.DealService;
 import com.ssafy.IBG.Game.service.GameService;
-import com.ssafy.IBG.service.UserService;
+import com.ssafy.IBG.User.Service.UserService;
 import com.ssafy.IBG.util.S3Uploader;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -109,8 +108,8 @@ public class DealApiController {
         List<DealResponse> collect = dealList.stream()
                 .map(deal -> new DealResponse(
                         deal.getDealNo(),
-                        deal.getUser().getUserNo(),
-                        deal.getUser().getUserNick(),
+                        deal.getUser().getNo(),
+                        deal.getUser().getNick(),
                         deal.getGame().getNo(),
                         deal.getGame().getName(),
                         deal.getDealTitle(),
@@ -138,8 +137,8 @@ public class DealApiController {
         List<DealResponse> collect = dealList.stream()
                 .map(deal -> new DealResponse(
                         deal.getDealNo(),
-                        deal.getUser().getUserNo(),
-                        deal.getUser().getUserNick(),
+                        deal.getUser().getNo(),
+                        deal.getUser().getNick(),
                         deal.getGame().getNo(),
                         deal.getGame().getName(),
                         deal.getDealTitle(),
@@ -166,8 +165,8 @@ public class DealApiController {
         if(deal == null) return new Result(HttpStatus.NO_CONTENT.value());
         DealResponse dealResponse = new DealResponse(
                 deal.getDealNo(),
-                deal.getUser().getUserNo(),
-                deal.getUser().getUserNick(),
+                deal.getUser().getNo(),
+                deal.getUser().getNick(),
                 deal.getGame().getNo(),
                 deal.getGame().getName(),
                 deal.getDealTitle(),

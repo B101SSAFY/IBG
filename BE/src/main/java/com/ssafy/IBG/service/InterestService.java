@@ -2,10 +2,10 @@ package com.ssafy.IBG.service;
 
 import com.ssafy.IBG.Game.domain.Game;
 import com.ssafy.IBG.domain.Interest;
-import com.ssafy.IBG.domain.User;
+import com.ssafy.IBG.User.domain.User;
 import com.ssafy.IBG.Game.repository.GameRepository;
 import com.ssafy.IBG.repository.InterestRepository;
-import com.ssafy.IBG.repository.UserRepository;
+import com.ssafy.IBG.User.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

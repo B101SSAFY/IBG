@@ -19,7 +19,7 @@ public class ReviewResponse{
     public ReviewResponse(Review review, Score score) {
         this.reviewNo = review.getNo();
         this.scoreRating = score.getRating();
-        this.userNick = review.getUser().getUserNick();
+        this.userNick = review.getUser().getNick();
         this.reviewContent = review.getContent();
         this.reviewReg = review.getCreatedDate().toString();
     }

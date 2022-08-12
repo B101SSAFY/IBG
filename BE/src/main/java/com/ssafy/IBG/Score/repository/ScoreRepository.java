@@ -8,12 +8,12 @@ import java.util.Optional;
 
 public interface ScoreRepository extends JpaRepository<Score, Integer> {
 
-    Optional<Score> findByUser_UserNoAndGame_No(int userNo, int gameNo);
+    Optional<Score> findByUser_NoAndGame_No(int userNo, int gameNo);
 
-    int countByUser_UserNo(int userNo);
+    int countByUser_No(int userNo);
 
-    List<Score> findByUser_UserNo(int userNo);
+    List<Score> findByUser_No(int userNo);
 
-    List<Score> findByUser_UserNoOrderByRatingDesc(int userNo);
+    List<Score> findByUser_NoOrderByRatingDesc(int userNo);
 
 }

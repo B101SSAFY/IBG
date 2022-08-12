@@ -3,15 +3,14 @@ package com.ssafy.IBG.api;
 import com.ssafy.IBG.api.chat.ChatListByUserResponse;
 import com.ssafy.IBG.api.chat.ChatLogSaveRequest;
 import com.ssafy.IBG.api.chat.LogResponse;
-import com.ssafy.IBG.api.deal.DealResponse;
 import com.ssafy.IBG.api.dto.Result;
 import com.ssafy.IBG.domain.Chat;
 import com.ssafy.IBG.domain.Deal;
 import com.ssafy.IBG.domain.Log;
-import com.ssafy.IBG.domain.User;
+import com.ssafy.IBG.User.domain.User;
 import com.ssafy.IBG.service.ChatService;
 import com.ssafy.IBG.service.DealService;
-import com.ssafy.IBG.service.UserService;
+import com.ssafy.IBG.User.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -75,10 +74,10 @@ public class ChatApiController {
                     String lastLog = chatService.getLastLog(chat.getChatNo());
                     return new ChatListByUserResponse(
                             chat.getChatNo(),
-                            chat.getUser().getUserNo(),
+                            chat.getUser().getNo(),
                             chat.getDeal().getDealNo(),
                             lastLog,
-                            chat.getUser().getUserNick(),
+                            chat.getUser().getNick(),
                             chat.getDeal().getDealPath(),
                             chat.getDeal().getDealTitle()
                             );
@@ -91,7 +90,7 @@ public class ChatApiController {
 
             // 상대 닉네임
             User user = userService.getUserByUserNo(chat.getUserNo());
-            chat.setUserName(user.getUserNick());
+            chat.setUserName(user.getNick());
 
             Deal deal = dealService.getDealDetailByDealNo(chat.getDealNo());
             // 이미지 파일 경로
@@ -115,8 +114,8 @@ public class ChatApiController {
                 .map( log -> new LogResponse(
                         log.getLogNo(),
                         log.getChat().getChatNo(),
-                        log.getUser().getUserNo(),
-                        log.getUser().getUserNick(),
+                        log.getUser().getNo(),
+                        log.getUser().getNick(),
                         log.getLogContent(),
                         log.getLogReg()
                 ))

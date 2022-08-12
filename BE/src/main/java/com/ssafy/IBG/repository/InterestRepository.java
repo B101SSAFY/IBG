@@ -33,7 +33,7 @@ public class InterestRepository {
      * */
     public Interest findInterestByUserNoGameNo(Integer userNo, Integer gameNo){
         try {
-            return em.createQuery("select i from Interest i where i.user.userNo =: userNo and i.game.no =: gameNo", Interest.class)
+            return em.createQuery("select i from Interest i where i.user.no =: userNo and i.game.no =: gameNo", Interest.class)
                     .setParameter("userNo", userNo)
                     .setParameter("gameNo", gameNo)
                     .getSingleResult();
@@ -46,7 +46,7 @@ public class InterestRepository {
      *  관심 목록 가져오기
      * */
     public List<Interest> findInterestListByUserNo(Integer userNo){
-        return em.createQuery("select i from Interest i where i.user.userNo =: userNo", Interest.class)
+        return em.createQuery("select i from Interest i where i.user.no =: userNo", Interest.class)
                 .setParameter("userNo", userNo)
                 .getResultList();
     }

@@ -5,6 +5,7 @@ import com.ssafy.IBG.Game.domain.Game;
 import com.ssafy.IBG.Game.service.GameService;
 import com.ssafy.IBG.Score.domain.Score;
 import com.ssafy.IBG.Score.service.ScoreService;
+import com.ssafy.IBG.User.Service.UserService;
 import com.ssafy.IBG.api.dto.Result;
 import com.ssafy.IBG.api.recommend.RecommendResultResponse;
 import com.ssafy.IBG.api.recommend.RecommendResultResponseWithTarget;

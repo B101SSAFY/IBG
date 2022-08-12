@@ -8,8 +8,8 @@ import com.ssafy.IBG.Review.dto.ReviewResponse;
 import com.ssafy.IBG.Review.repository.ReviewRepository;
 import com.ssafy.IBG.Score.domain.Score;
 import com.ssafy.IBG.Score.repository.ScoreRepository;
-import com.ssafy.IBG.domain.User;
-import com.ssafy.IBG.repository.UserRepository;
+import com.ssafy.IBG.User.domain.User;
+import com.ssafy.IBG.User.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,12 +32,12 @@ public class ReviewService {
     public List<ReviewResponse> getReviewByGameNo(int gameNo){
         // TODO: join
         return reviewRepository.findByGame_NoOrderByNoDesc(gameNo).stream()
-                .map(review -> new ReviewResponse(review, findScoreByUserNoAndGameNo(review.getUser().getUserNo(), gameNo))
+                .map(review -> new ReviewResponse(review, findScoreByUserNoAndGameNo(review.getUser().getNo(), gameNo))
                 ).collect(Collectors.toList());
     }
 
     private Score findScoreByUserNoAndGameNo(int userNo, int gameNo){
-        return scoreRepository.findByUser_UserNoAndGame_No(userNo, gameNo)
+        return scoreRepository.findByUser_NoAndGame_No(userNo, gameNo)
                 .orElse(Score.builder().build());
     }
 

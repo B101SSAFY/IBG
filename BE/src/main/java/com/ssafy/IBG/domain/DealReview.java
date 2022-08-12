@@ -1,5 +1,6 @@
 package com.ssafy.IBG.domain;
 
+import com.ssafy.IBG.User.domain.User;
 import lombok.Data;
 
 import javax.persistence.*;

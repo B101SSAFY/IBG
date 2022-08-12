@@ -11,7 +11,7 @@ public class DealReviewResponse {
 
     public DealReviewResponse(DealReview dealReview) {
         this.dealReviewNo = dealReview.getDealReviewNo();
-        this.userNick = dealReview.getUser().getUserNick();
+        this.userNick = dealReview.getUser().getNick();
         this.dealReviewContent = dealReview.getDealReviewContent();
     }
 }

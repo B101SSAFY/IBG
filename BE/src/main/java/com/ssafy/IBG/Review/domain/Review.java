@@ -2,16 +2,12 @@ package com.ssafy.IBG.Review.domain;
 
 import com.ssafy.IBG.Game.domain.BaseTimeEntity;
 import com.ssafy.IBG.Game.domain.Game;
-import com.ssafy.IBG.domain.User;
+import com.ssafy.IBG.User.domain.User;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 @Getter
 @Entity

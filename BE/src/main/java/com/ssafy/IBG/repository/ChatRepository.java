@@ -23,7 +23,7 @@ public class ChatRepository {
     **/
     public Chat findChatByDealNoAndUserNo(int dealNo, int userNo) {
         try{
-            return em.createQuery("select c from Chat c where c.deal.dealNo = :dealNo and c.user.userNo = :userNo", Chat.class)
+            return em.createQuery("select c from Chat c where c.deal.dealNo = :dealNo and c.user.no = :userNo", Chat.class)
                     .setParameter("dealNo", dealNo)
                     .setParameter("userNo", userNo)
                     .getSingleResult();
@@ -63,7 +63,7 @@ public class ChatRepository {
     }
 
     public List<Chat> findChatByUserNo(int userNo) {
-        return em.createQuery("select c from Chat c where c.user.userNo = :userNo or c.deal.user.userNo = :userNo", Chat.class)
+        return em.createQuery("select c from Chat c where c.user.no = :userNo or c.deal.user.no = :userNo", Chat.class)
                 .setParameter("userNo", userNo)
                 .getResultList();
     }

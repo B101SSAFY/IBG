@@ -83,7 +83,7 @@ public class RecommendRepository {
     * @date : 2022-04-01 오후 3:57
     **/
     public List<Recommend> findRecommendByUserNo(int userNo){
-        return em.createQuery("select r from Recommend r where r.user.userNo = :userNo order by r.recommendRating desc", Recommend.class)
+        return em.createQuery("select r from Recommend r where r.user.no = :userNo order by r.recommendRating desc", Recommend.class)
                 .setParameter("userNo", userNo)
                 .getResultList();
     }

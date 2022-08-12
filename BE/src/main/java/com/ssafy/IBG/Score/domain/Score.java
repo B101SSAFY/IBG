@@ -1,7 +1,7 @@
 package com.ssafy.IBG.Score.domain;
 
 import com.ssafy.IBG.Game.domain.Game;
-import com.ssafy.IBG.domain.User;
+import com.ssafy.IBG.User.domain.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -4,7 +4,7 @@ import com.ssafy.IBG.Score.domain.Score;
 import com.ssafy.IBG.Game.repository.GameRepository;
 import com.ssafy.IBG.Score.dto.ScoreRequest;
 import com.ssafy.IBG.Score.repository.ScoreRepository;
-import com.ssafy.IBG.repository.UserRepository;
+import com.ssafy.IBG.User.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +24,7 @@ public class ScoreService {
     @Transactional
     public void registScore(int gameNo, ScoreRequest request) {
         try{
-            Score score = scoreRepository.findByUser_UserNoAndGame_No(request.getUserNo(), gameNo).get();
+            Score score = scoreRepository.findByUser_NoAndGame_No(request.getUserNo(), gameNo).get();
             score.updateScore(request.getScoreRating());
         }catch (NoSuchElementException e){
             scoreRepository.save(Score.builder().game(gameRepository.findById(gameNo).get()).user(userRepository.findUserByUserNo(request.getUserNo())).build());
@@ -32,11 +32,11 @@ public class ScoreService {
     }
 
     public int getScoreCnt(Integer userNo){
-        return scoreRepository.countByUser_UserNo(userNo);
+        return scoreRepository.countByUser_No(userNo);
     }
 
     public Score getScoreByUserNoGameNo(Integer userNo, Integer gameNo){
-        Score score = scoreRepository.findByUser_UserNoAndGame_No(userNo, gameNo)
+        Score score = scoreRepository.findByUser_NoAndGame_No(userNo, gameNo)
                 .orElse(Score.builder().rating(0).build());
         return score;
     }
@@ -47,7 +47,7 @@ public class ScoreService {
     * @desc : 유저가 평점 매긴 게임 찾기
     **/
     public List<Score> getScoreByUserNo(Integer userNo){
-        return scoreRepository.findByUser_UserNo(userNo);
+        return scoreRepository.findByUser_No(userNo);
     }
 
     /**
@@ -56,7 +56,7 @@ public class ScoreService {
      * @desc : 유저가 평가한 게임 목록 평점 순 상위 10개 가져오기
      **/
     public List<Score> getScoreListByUserNoOrderByRating(Integer userNo){
-        return scoreRepository.findByUser_UserNoOrderByRatingDesc(userNo);
+        return scoreRepository.findByUser_NoOrderByRatingDesc(userNo);
     }
 
 }
